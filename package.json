@@ -8,7 +8,7 @@
     "build": "env-cmd -f ./.env.production webpack --config webpack.prod.js --mode production && yarn createHtml",
     "createHtml": "cp ./src/view/index.html ./dist/index.html",
     "package": "yarn run build",
-    "postpackage": "electron-packager ./ --out=./builds"
+    "postpackage": "electron-packager ./ --out=./builds --ignore=\"(src|.env*|webpack*|yarn.lock|.gitignore|.vscode)\""
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

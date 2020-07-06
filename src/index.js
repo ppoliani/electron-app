@@ -1,5 +1,4 @@
-const {app, BrowserWindow} = require('electron')
-const url = require('url');
+const {app, BrowserWindow} = require('electron');
 const path = require('path');
 
 // Keep a reference for dev mode
@@ -12,31 +11,34 @@ if (process.platform === 'win32') {
   app.commandLine.appendSwitch('force-device-scale-factor', '1')
 }
 
+let mainWindow;
+
 function createWindow () {
   // Create the browser window.
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
     show: false, // don't show until window is ready
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      devTools: dev
     }
   })
 
   if (dev) {
-    win.loadURL('http://localhost:3000/index.html');
+    mainWindow.loadURL('http://localhost:3000/index.html');
   } 
   else {
-    win.loadFile(path.join(__dirname, 'dist', 'index.html'));
+    mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
   }
 
 
   // Don't show the app window until it is ready and loaded
-  win.once('ready-to-show', () => {
-    win.show();
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
 
     if (dev) {
-      win.webContents.openDevTools();
+      mainWindow.webContents.openDevTools();
     }
   })
 }
