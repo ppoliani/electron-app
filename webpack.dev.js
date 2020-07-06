@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const {spawn} = require('child_process');
 const path = require('path');
@@ -5,6 +6,9 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   mode: 'development',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, './'),

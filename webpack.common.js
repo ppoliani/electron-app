@@ -4,7 +4,6 @@ const fs = require('fs');
 const dotenv = require('dotenv');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const distPath = path.join(__dirname, './dist');
 const envPath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`);
 
 const parseStringifiedEnv = envPath => {
@@ -27,11 +26,11 @@ const parseEnv = envPath => {
 
 module.exports = {
   entry: {
-    root: './src/view/App.jsx'
+    app: './src/view/App.jsx'
   },
 
   output: {
-    path: distPath,
+    path: path.join(__dirname, './dist'),
     publicPath: '/',
     filename: '[name].bundle.js'
   },
@@ -41,7 +40,7 @@ module.exports = {
     __filename: false
   },
 
-  target: 'electron-main',
+  target: 'electron-renderer',
 
   resolve: {
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
@@ -50,11 +49,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin(parseStringifiedEnv(envPath)),
     new webpack.NamedModulesPlugin(),
-    new CleanWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: './src/view/index.html',
-    // }),
+    new CleanWebpackPlugin()
   ],
 
   module: {
