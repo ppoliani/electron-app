@@ -1,5 +1,5 @@
 import store from '../data/core/store';
 import bootstrap from './AppRoot';
-import Home from './pages/home';
+import Router from './core/Router';
 
-bootstrap(store, Home);
+bootstrap(store, Router);
