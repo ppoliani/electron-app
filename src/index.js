@@ -41,6 +41,18 @@ function createWindow () {
       mainWindow.webContents.openDevTools();
     }
   })
+
+  const menu = Menu.buildFromTemplate([{
+    label: 'Menu',
+    submenu: [
+        {label:'Adjust Notification Value'},
+        {label:'CoinMarketCap'},
+        {label:'Exit'}
+    ]
+  }
+])
+
+  Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished
