@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+const electron = window.require("electron")
+console.log(electron.remote.dialog.showMessageBox({type: 'info', title: 'Welcome', message: 'welcom to electron'}))
+
 const Home = props => {
   return (
     <div>

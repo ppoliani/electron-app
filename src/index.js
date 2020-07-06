@@ -20,6 +20,7 @@ function createWindow () {
     height: 768,
     show: false, // don't show until window is ready
     webPreferences: {
+      enableRemoteModule: true,
       nodeIntegration: true,
       devTools: dev
     }
@@ -31,7 +32,6 @@ function createWindow () {
   else {
     mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
   }
-
 
   // Don't show the app window until it is ready and loaded
   mainWindow.once('ready-to-show', () => {
