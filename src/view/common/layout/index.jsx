@@ -1,10 +1,8 @@
 import React from 'react';
 
 const Layout = props => {
-  const {classes} = props;
-
   return (
-    <div className={classes.root}>
+    <div>
       <header>Header</header>
       <main>
         <section>
