@@ -1,14 +1,14 @@
 {
   "name": "electron-app",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "app.js",
   "license": "MIT",
   "scripts": {
     "start": "env-cmd -f ./.env.dev webpack-dev-server --config=./webpack.dev.js --mode development",
     "build": "env-cmd -f ./.env.production webpack --config webpack.prod.js --mode production && yarn createHtml",
     "createHtml": "cp ./src/view/index.html ./dist/index.html",
     "package": "yarn run build",
-    "postpackage": "electron-packager ./ --out=./builds --ignore=\"(src|.env*|webpack*|yarn.lock|.gitignore|.vscode)\""
+    "postpackage": "electron-packager . --overwrite --platform=darwin --arch=x64  --out=./builds --ignore=\"(src|.env*|webpack*|yarn.lock|.gitignore|.vscode)\""
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
