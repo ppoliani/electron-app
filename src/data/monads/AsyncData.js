@@ -1,5 +1,5 @@
 import union from 'folktale/adt/union/union';
-import {constant} from '../services/fn';
+import {constant} from '../../services/fn';
 
 export const AsyncData = union('AsyncData', {
   Empty: () => true,

@@ -1,10 +1,12 @@
 const {app, BrowserWindow} = require('electron')
+const url = require('url');
+const path = require('path');
 
 // Add React extension for development
-const {
-  default: installExtension, 
-  REACT_DEVELOPER_TOOLS
-} = require('electron-devtools-installer')
+// const {
+//   default: installExtension, 
+//   REACT_DEVELOPER_TOOLS
+// } = require('electron-devtools-installer')
 
 // Keep a reference for dev mode
 let dev = false
@@ -32,17 +34,8 @@ function createWindow () {
     }
   })
 
-  // Determine the correct index.html file
-  // (created by webpack) to load in dev and production
-  let indexPath
-
   if (dev && process.argv.indexOf('--noDevServer') === -1) {
-    indexPath = url.format({
-      protocol: 'http:',
-      host: 'localhost:8080',
-      pathname: 'index.html',
-      slashes: true
-    })
+    win.loadURL('http://localhost:3000/index.html');
   } 
   else {
     indexPath = url.format({
@@ -50,20 +43,22 @@ function createWindow () {
       pathname: path.join(__dirname, 'dist', 'index.html'),
       slashes: true
     })
+
+    win.loadFile(path.join(__dirname, 'dist', 'index.html'));
   }
 
-  // and load the index.html of the app.
-  win.loadFile(indexPath);
 
   // Don't show the app window until it is ready and loaded
   win.once('ready-to-show', () => {
     win.show()
     // Open the DevTools automatically if developing
-    if (dev) {
-      installExtension(REACT_DEVELOPER_TOOLS)
-        .catch(err => console.log('Error loading React DevTools: ', err))
-        win.webContents.openDevTools()
-    }
+    // TODO: this doesn't work with the latest version of electron
+    // https://github.com/dimitarnestorov/react-devtools-electron/issues/162
+    // if (dev) {
+    //   installExtension(REACT_DEVELOPER_TOOLS)
+    //     .catch(err => console.log('Error loading React DevTools: ', err))
+    //     win.webContents.openDevTools()
+    // }
   })
 
   // Open the DevTools.
