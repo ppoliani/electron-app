@@ -20,6 +20,7 @@
     "css-loader": "^3.6.0",
     "electron": "^9.0.5",
     "electron-devtools-installer": "^3.1.0",
+    "electron-packager": "^15.0.0",
     "env-cmd": "^10.1.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
