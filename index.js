@@ -9,12 +9,7 @@ const path = require('path');
 // } = require('electron-devtools-installer')
 
 // Keep a reference for dev mode
-let dev = false
-
-// Determine the mode (dev or production)
-if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
-  dev = true
-}
+let dev = process.env.NODE_ENV === 'dev';
 
 // Temporary fix for broken high-dpi scale factor on Windows (125% scaling)
 // info: https://github.com/electron/electron/issues/9691
@@ -54,15 +49,13 @@ function createWindow () {
     // Open the DevTools automatically if developing
     // TODO: this doesn't work with the latest version of electron
     // https://github.com/dimitarnestorov/react-devtools-electron/issues/162
-    // if (dev) {
+    if (dev) {
+      win.webContents.openDevTools();
     //   installExtension(REACT_DEVELOPER_TOOLS)
     //     .catch(err => console.log('Error loading React DevTools: ', err))
     //     win.webContents.openDevTools()
-    // }
+    }
   })
-
-  // Open the DevTools.
-  win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
