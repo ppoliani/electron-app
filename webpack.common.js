@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const distPath = path.join(__dirname, './dist');
 const envPath = path.join(__dirname, `./.env.${process.env.NODE_ENV}`);
@@ -25,7 +24,6 @@ const parseEnv = envPath => {
 
   return envObj;
 };
-
 
 module.exports = {
   entry: {
@@ -54,9 +52,9 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/view/index.html',
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: './src/view/index.html',
+    // }),
   ],
 
   module: {

@@ -10,6 +10,15 @@ module.exports = merge(common, {
     contentBase: path.resolve(__dirname, './'),
     port: process.env.PORT,
     hot: true,
+    historyApiFallback: {
+      disableDotRule: true,
+      rewrites: [
+        {
+          from: /./,
+          to: './src/view/index.html'
+        }
+      ]
+    },
     stats: {
       colors: true,
       chunks: false,
